@@ -1,10 +1,30 @@
 package View;
 
-public class CustomerFrame extends javax.swing.JFrame {
+import DAO.CustomerDAO;
+import Model.CustomerModel;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
+public class CustomerFrame extends javax.swing.JFrame {
+    CustomerDAO customerDAO;
+    
     public CustomerFrame() {
         initComponents();
+        customerDAO = new CustomerDAO();
         
+        DefaultTableModel tblmodel = new DefaultTableModel();
+        tbl_customer.setModel(tblmodel);
+        
+        tblmodel.addColumn("Mã KH");
+        tblmodel.addColumn("Tên KH");
+        tblmodel.addColumn("Phone");
+        tblmodel.addColumn("Địa chỉ");
+
+        List<CustomerModel> customers = customerDAO.getCustomers();
+        
+        for(CustomerModel customer: customers){
+            tblmodel.addRow(new Object[]{customer.getcID(), customer.getcName(), customer.getcPhone(), customer.getDiachi()});
+        }
     }
 
     /**

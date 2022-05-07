@@ -13,7 +13,7 @@ public class CustomerDAO {
     public List<CustomerModel> getCustomers(){
         List<CustomerModel> customers = new ArrayList<CustomerModel>();
         Connection con = ConnectSQL.getConnect();
-        String sql = "select cID,cName,cPhone, N'xã ' + tenXa + ' - ' + N'huyện ' + tenHuyen + ' - ' + N'tỉnh ' + tenTinh as N'Địa chỉ'\n" +
+        String sql = "select cID,cName,cPhone, N'xã ' + tenXa + ' - ' + N'huyện ' + tenHuyen + ' - ' + N'tỉnh ' + tenTinh as diachi\n" +
 "from customer,xa,huyen,tinh \n" +
 "where customer.cXa = xa.cXa and xa.cHuyen = huyen.cHuyen and tinh.cTinh = huyen.cTinh";
         try{
