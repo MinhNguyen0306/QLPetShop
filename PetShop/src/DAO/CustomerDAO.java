@@ -32,4 +32,22 @@ public class CustomerDAO {
         }      
         return customers;
     }
+    
+    public void addCustomer(CustomerModel customer){
+        Connection con = ConnectSQL.getConnect();
+        String sql = "insert into customer(cName,cPhone,cXa) values(?,?,?)";
+        try{
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, customer.getcName());
+            pst.setString(2, customer.getcPhone());
+            pst.setString(3, customer.getDiachi());
+            
+            int rs = pst.executeUpdate();
+            CustomerFrame c = new CustomerFrame();
+            JOptionPane.showMessageDialog(c, "Added Succecfully!");
+            System.out.print(rs);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
