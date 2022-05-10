@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.CustomerModel;
+import View.CustomerFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +46,41 @@ public class CustomerDAO {
             int rs = pst.executeUpdate();
             CustomerFrame c = new CustomerFrame();
             JOptionPane.showMessageDialog(c, "Added Succecfully!");
+            System.out.print(rs);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void editCustomer(CustomerModel customer){
+        Connection con = ConnectSQL.getConnect();
+        String sql = "update customer set cName=?, cPhone=?, cXa=? where cID=?";
+        try{
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, customer.getcName());
+            pst.setString(2, customer.getcPhone());
+            pst.setString(3, customer.getDiachi());
+            pst.setString(4, customer.getcID());
+            
+            int rs = pst.executeUpdate();
+            CustomerFrame c = new CustomerFrame();
+            JOptionPane.showMessageDialog(c, "Update Succecfully!");
+            System.out.print(rs);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteCustomer(CustomerModel customer){
+        Connection con = ConnectSQL.getConnect();
+        String sql = "delete from customer where cID = ?";
+        try{
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, customer.getcID());
+            
+            int rs = pst.executeUpdate();
+            CustomerFrame c = new CustomerFrame();
+            JOptionPane.showMessageDialog(c, "Delete Succecfully!");
             System.out.print(rs);
         }catch(Exception e){
             e.printStackTrace();
