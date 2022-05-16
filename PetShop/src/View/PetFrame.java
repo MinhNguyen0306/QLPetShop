@@ -295,7 +295,13 @@ public class PetFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        
+        PetModel pet = new PetModel();
+        pet.setpName(txt_name.getText());
+        pet.setpCategory(cbx_category.getSelectedItem().toString());
+        pet.setpQuantity(Integer.parseInt(txt_quantity.getText()));   
+        pet.setpPrice(Float.parseFloat(txt_price.getText())); 
+        petDAO.addPet(pet);
+        display_table();
     }//GEN-LAST:event_btn_saveActionPerformed
 
     /**
