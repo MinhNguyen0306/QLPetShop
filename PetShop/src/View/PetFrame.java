@@ -179,6 +179,11 @@ public class PetFrame extends javax.swing.JFrame {
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit.png"))); // NOI18N
         btn_edit.setText("Edit");
         btn_edit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
         btn_del.setForeground(new java.awt.Color(255, 0, 51));
         btn_del.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/del.png"))); // NOI18N
@@ -303,6 +308,16 @@ public class PetFrame extends javax.swing.JFrame {
         petDAO.addPet(pet);
         display_table();
     }//GEN-LAST:event_btn_saveActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        PetModel pet = new PetModel();
+        pet.setpName(txt_name.getText());
+        pet.setpCategory(cbx_category.getSelectedItem().toString());
+        pet.setpQuantity(Integer.parseInt(txt_quantity.getText()));
+        pet.setpPrice(Float.parseFloat(txt_price.getText()));
+        petDAO.editPet(pet);
+        display_table();
+    }//GEN-LAST:event_btn_editActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,17 +1,17 @@
 package Model;
 
 public class PetModel {
-    private String pID;
+    private int pID;
     private String pName;
     private String pCategory;
     private int pQuantity;
     private float pPrice;
 
-    public String getpID() {
+    public int getpID() {
         return pID;
     }
 
-    public void setpID(String pID) {
+    public void setpID(int pID) {
         this.pID = pID;
     }
     
