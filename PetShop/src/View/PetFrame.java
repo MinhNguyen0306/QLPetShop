@@ -1,8 +1,10 @@
 package View;
 
 import DAO.PetDAO;
-import Model.CustomerModel;
 import Model.PetModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +35,21 @@ public class PetFrame extends javax.swing.JFrame {
         }
     }
     
-    
+    public void displayCBX_category(){
+        Connection con = ConnectSQL.getConnect();
+        String sql = "select pCategory from pet";
+        try{
+            
+            PreparedStatement st = con.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                cbx_category.addItem(rs.getString("pCategory"));
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        } 
+    }
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,6 +156,11 @@ public class PetFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_pet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_petMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_pet);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
@@ -152,6 +173,11 @@ public class PetFrame extends javax.swing.JFrame {
         btn_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reset.png"))); // NOI18N
         btn_reset.setText("Reset");
         btn_reset.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,11 +215,21 @@ public class PetFrame extends javax.swing.JFrame {
         btn_del.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/del.png"))); // NOI18N
         btn_del.setText("Delete");
         btn_del.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_delActionPerformed(evt);
+            }
+        });
 
         btn_home.setForeground(new java.awt.Color(255, 0, 51));
         btn_home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.png"))); // NOI18N
         btn_home.setText("Home");
         btn_home.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_homeActionPerformed(evt);
+            }
+        });
 
         cbx_category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -318,6 +354,36 @@ public class PetFrame extends javax.swing.JFrame {
         petDAO.editPet(pet);
         display_table();
     }//GEN-LAST:event_btn_editActionPerformed
+
+    private void btn_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delActionPerformed
+        PetModel pet = new PetModel();
+        pet.setpID(Integer.parseInt(txt_pID.getText()));
+        petDAO.deleteCustomer(pet);
+        display_table();
+    }//GEN-LAST:event_btn_delActionPerformed
+
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
+        HomeFrame home = new HomeFrame();
+        home.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_resetActionPerformed
+
+    private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
+        txt_pID.setText("");
+        txt_name.setText("");
+        txt_quantity.setText("");
+        txt_price.setText("");
+    }//GEN-LAST:event_btn_homeActionPerformed
+
+    private void tbl_petMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_petMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tbl_pet.getModel();
+        int index = tbl_pet.getSelectedRow();
+        txt_pID.setText(model.getValueAt(index, 0).toString());
+        txt_name.setText(model.getValueAt(index, 1).toString());
+        cbx_category.setSelectedItem(model.getValueAt(index, 2).toString());
+        txt_quantity.setText(model.getValueAt(index, 3).toString());
+        txt_price.setText(model.getValueAt(index, 4).toString());
+    }//GEN-LAST:event_tbl_petMouseClicked
 
     /**
      * @param args the command line arguments

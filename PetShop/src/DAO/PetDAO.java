@@ -70,5 +70,21 @@ public class PetDAO {
             e.printStackTrace();
         }
     }
+    
+    public void deleteCustomer(PetModel pet){
+        Connection con = ConnectSQL.getConnect();
+        String sql = "delete from pet where pID = ?";
+        try{
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, pet.getpID());
+            
+            int rs = pst.executeUpdate();
+            PetFrame p = new PetFrame();
+            JOptionPane.showMessageDialog(p, "Delete Succecfully!");
+            System.out.print(rs);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
 
