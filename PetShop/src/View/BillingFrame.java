@@ -1,21 +1,67 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
-/**
- *
- * @author Admin
- */
-public class BillingFrame extends javax.swing.JFrame {
+import DAO.ConnectSQL;
+import DAO.PetDAO;
+import Model.PetModel;
+import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-    /**
-     * Creates new form BillingFrame
-     */
+
+public class BillingFrame extends javax.swing.JFrame {
+    PetDAO petDAO;
+    
     public BillingFrame() {
         initComponents();
+        display_pet();
+        displayCBX_customer();
     }
+    
+    public void display_pet(){
+        petDAO = new PetDAO();
+        
+        DefaultTableModel tblmodel = new DefaultTableModel();
+        tbl_petlist.setModel(tblmodel);
+        
+        tblmodel.addColumn("Pet ID");
+        tblmodel.addColumn("Tên pet");
+        tblmodel.addColumn("Loại");
+        tblmodel.addColumn("Số lượng");
+        tblmodel.addColumn("Giá");
+
+        List<PetModel> pets = petDAO.getPets();
+        
+        for(PetModel pet: pets){
+            tblmodel.addRow(new Object[]{pet.getpID(), pet.getpName(), pet.getpCategory(), pet.getpQuantity(), pet.getpPrice()});
+        }
+    }
+    
+    public void displayCBX_customer(){
+        Connection con = ConnectSQL.getConnect();
+        String sql = "select cName from customer";
+        try{
+            
+            PreparedStatement st = con.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                cbx_customer.addItem(rs.getString("cName"));
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        } 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,6 +155,11 @@ public class BillingFrame extends javax.swing.JFrame {
         btn_add.setForeground(new java.awt.Color(255, 0, 51));
         btn_add.setText("Add to Bill");
         btn_add.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
 
         btn_print.setForeground(new java.awt.Color(255, 0, 51));
         btn_print.setText("Print");
@@ -124,8 +175,6 @@ public class BillingFrame extends javax.swing.JFrame {
             }
         });
 
-        cbx_customer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lbl_totalbill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_totalbill.setForeground(new java.awt.Color(255, 255, 255));
         lbl_totalbill.setText("Total Bill Price");
@@ -139,15 +188,6 @@ public class BillingFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbx_customer, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_product, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_quantity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                                .addComponent(txt_price, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,7 +195,19 @@ public class BillingFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btn_home, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                                    .addComponent(btn_print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(btn_print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbx_customer, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txt_price, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_quantity, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_product, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(lbl_totalbill)))
@@ -190,7 +242,7 @@ public class BillingFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
@@ -220,9 +272,14 @@ public class BillingFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        tbl_petlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_petlistMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_petlist);
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
@@ -252,7 +309,7 @@ public class BillingFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "bID", "Product", "Price", "Quantity", "Total"
             }
         ));
         jScrollPane2.setViewportView(tbl_customerbill);
@@ -299,6 +356,30 @@ public class BillingFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_homeActionPerformed
 
+    private void tbl_petlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_petlistMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tbl_petlist.getModel();
+        int index = tbl_petlist.getSelectedRow();
+        txt_product.setText(model.getValueAt(index, 1).toString());
+        txt_quantity.setText(model.getValueAt(index, 3).toString());
+        txt_price.setText(model.getValueAt(index, 4).toString());
+    }//GEN-LAST:event_tbl_petlistMouseClicked
+
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        if(txt_product.getText().isEmpty() || txt_quantity.getText().isEmpty() || txt_price.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Thiếu thông tin!");
+        }else{
+            int total = Integer.valueOf(txt_quantity.getText().toString()) * Integer.valueOf(txt_price.getText().toString());
+            tbl_customerbill.setValueAt(n, row, 0);
+            tbl_customerbill.setValueAt(txt_product.getText(), row, 1);
+            tbl_customerbill.setValueAt(txt_price.getText(), row, 2);
+            tbl_customerbill.setValueAt(txt_quantity.getText(), row, 3);
+            tbl_customerbill.setValueAt(total, row, 4);
+            n++;
+            row++;
+        }
+    }//GEN-LAST:event_btn_addActionPerformed
+int n = 1;
+int row = 1;
     /**
      * @param args the command line arguments
      */

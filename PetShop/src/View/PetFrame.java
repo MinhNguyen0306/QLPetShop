@@ -1,5 +1,6 @@
 package View;
 
+import DAO.ConnectSQL;
 import DAO.PetDAO;
 import Model.PetModel;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ public class PetFrame extends javax.swing.JFrame {
     public PetFrame() {
         initComponents();
         display_table();
+        displayCBX_category();
     }
     
     public void display_table(){
