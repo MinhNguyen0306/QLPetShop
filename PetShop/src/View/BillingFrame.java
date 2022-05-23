@@ -54,7 +54,21 @@ public class BillingFrame extends javax.swing.JFrame {
         } 
     }
     
-    
+    public void update_tblproduct_increase(){
+        Connection con = ConnectSQL.getConnect();
+        String sql = "update pet set pQuantity=? where pID=?";
+        try{
+            int newqty = qty - Integer.parseInt(txt_quantity.getText());
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, newqty);
+            pst.setInt(2, pid);
+            int rs = pst.executeUpdate();
+            //JOptionPane.showMessageDialog(c, "Update Succecfully!");
+            display_pet();
+            System.out.print(rs);
+        }catch(Exception e){
+        }
+    }
     
     
     
@@ -135,6 +149,8 @@ public class BillingFrame extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Price");
 
+        txt_product.setEnabled(false);
+
         btn_reset.setForeground(new java.awt.Color(255, 0, 51));
         btn_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reset.png"))); // NOI18N
         btn_reset.setText("Reset");
@@ -150,7 +166,7 @@ public class BillingFrame extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Quantity");
+        jLabel3.setText("Input Quantity");
 
         btn_add.setForeground(new java.awt.Color(255, 0, 51));
         btn_add.setText("Add to Bill");
@@ -164,6 +180,13 @@ public class BillingFrame extends javax.swing.JFrame {
         btn_print.setForeground(new java.awt.Color(255, 0, 51));
         btn_print.setText("Print");
         btn_print.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_printActionPerformed(evt);
+            }
+        });
+
+        txt_price.setEnabled(false);
 
         btn_home.setForeground(new java.awt.Color(255, 0, 51));
         btn_home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.png"))); // NOI18N
@@ -225,14 +248,14 @@ public class BillingFrame extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(txt_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(2, 2, 2)
+                .addComponent(txt_quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
                 .addComponent(lbl_totalbill)
                 .addGap(79, 79, 79)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -242,7 +265,7 @@ public class BillingFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
@@ -355,15 +378,20 @@ public class BillingFrame extends javax.swing.JFrame {
         home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_homeActionPerformed
-
+    int qty;
+    int pid;
     private void tbl_petlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_petlistMouseClicked
         DefaultTableModel model = (DefaultTableModel) tbl_petlist.getModel();
         int index = tbl_petlist.getSelectedRow();
+        pid = Integer.valueOf(model.getValueAt(index, 0).toString());
         txt_product.setText(model.getValueAt(index, 1).toString());
-        txt_quantity.setText(model.getValueAt(index, 3).toString());
+        qty = Integer.valueOf(model.getValueAt(index, 3).toString());
         txt_price.setText(model.getValueAt(index, 4).toString());
     }//GEN-LAST:event_tbl_petlistMouseClicked
 
+    int n = 1;
+    int row = 1;
+    int totalbill;
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         if(txt_product.getText().isEmpty() || txt_quantity.getText().isEmpty() || txt_price.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Thiếu thông tin!");
@@ -374,12 +402,22 @@ public class BillingFrame extends javax.swing.JFrame {
             tbl_customerbill.setValueAt(txt_price.getText(), row, 2);
             tbl_customerbill.setValueAt(txt_quantity.getText(), row, 3);
             tbl_customerbill.setValueAt(total, row, 4);
+            totalbill += total;
+            lbl_totalbill.setText("Tổng tiền: " + totalbill);
             n++;
             row++;
+            update_tblproduct_increase();
         }
     }//GEN-LAST:event_btn_addActionPerformed
-int n = 1;
-int row = 1;
+
+    private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
+        try{
+            tbl_customerbill.print();
+        } catch(Exception e){
+            
+        }
+    }//GEN-LAST:event_btn_printActionPerformed
+
     /**
      * @param args the command line arguments
      */
