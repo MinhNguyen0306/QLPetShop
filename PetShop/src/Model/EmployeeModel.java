@@ -1,10 +1,19 @@
 package Model;
 
 public class EmployeeModel {
+    private int eID;
     private String eName;
     private String ePhone;
     private String eGender;
     private String ePass;
+
+    public int geteID() {
+        return eID;
+    }
+
+    public void seteID(int eID) {
+        this.eID = eID;
+    }
 
     public String geteName() {
         return eName;

@@ -1,6 +1,5 @@
 package DAO;
 
-import Model.CustomerModel;
 import Model.EmployeeModel;
 import View.HomeFrame;
 import View.LoginFrame;
@@ -8,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginDAO {
@@ -30,5 +30,26 @@ public class LoginDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public List<EmployeeModel> getPets(){
+        List<EmployeeModel> emps = new ArrayList<EmployeeModel>();
+        Connection con = ConnectSQL.getConnect();
+        String sql = "select * from employee";
+        try{
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                EmployeeModel emp = new EmployeeModel();
+                emp.seteID(rs.getInt("eID"));
+                emp.seteName(rs.getString("eName"));
+                emp.setePhone(rs.getString("ePhone"));
+                emp.seteGender(rs.getString("eGender"));
+                emp.setePass(rs.getString("ePass"));
+                emps.add(emp);
+            }
+        } catch(Exception e){
+        }      
+        return emps;
     }
 }
