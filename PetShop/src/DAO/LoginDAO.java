@@ -21,18 +21,18 @@ public class LoginDAO {
             ResultSet rs = pst.executeQuery();
             LoginFrame login = new LoginFrame();
             if(rs.next()){
+                JOptionPane.showMessageDialog(login, "Đăng nhập thành công!");
                 HomeFrame home = new HomeFrame();
                 home.setVisible(true);
-                JOptionPane.showMessageDialog(login, "Login Succecfully!");
             }else{
-                JOptionPane.showMessageDialog(login, "Login Failed");             
+                JOptionPane.showMessageDialog(login, "Tài khoản hoặc mật khẩu không đúng!");             
             }      
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     
-    public List<EmployeeModel> getPets(){
+    public List<EmployeeModel> getEmployee(){
         List<EmployeeModel> emps = new ArrayList<EmployeeModel>();
         Connection con = ConnectSQL.getConnect();
         String sql = "select * from employee";
