@@ -32,17 +32,15 @@ public class EmployeeFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_employee = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        btn_editname = new javax.swing.JButton();
         btn_editpass = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
-        btn_del = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel5.setForeground(new java.awt.Color(0, 204, 102));
         jLabel5.setText("Manage Account Employees");
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/employee.png"))); // NOI18N
@@ -52,7 +50,7 @@ public class EmployeeFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -80,39 +78,47 @@ public class EmployeeFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        btn_editname.setText("Edit Username");
-
+        btn_editpass.setBackground(new java.awt.Color(51, 51, 51));
+        btn_editpass.setForeground(new java.awt.Color(255, 255, 255));
+        btn_editpass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit.png"))); // NOI18N
         btn_editpass.setText("Edit Password");
+        btn_editpass.setBorder(null);
+        btn_editpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editpassActionPerformed(evt);
+            }
+        });
 
+        btn_back.setBackground(new java.awt.Color(51, 51, 51));
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.png"))); // NOI18N
         btn_back.setText("Back to login");
-
-        btn_del.setText("Delete ");
+        btn_back.setBorder(null);
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
-                .addComponent(btn_editname)
-                .addGap(57, 57, 57)
-                .addComponent(btn_editpass)
-                .addGap(63, 63, 63)
-                .addComponent(btn_del, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(btn_back)
-                .addGap(87, 87, 87))
+                .addGap(241, 241, 241)
+                .addComponent(btn_editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_editpass)
-                    .addComponent(btn_editname)
-                    .addComponent(btn_del)
-                    .addComponent(btn_back))
-                .addGap(45, 45, 45))
+                    .addComponent(btn_editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,13 +134,22 @@ public class EmployeeFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_editpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editpassActionPerformed
+        new EditEmployeeFrame().setVisible(true);
+    }//GEN-LAST:event_btn_editpassActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        new LoginFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,8 +188,6 @@ public class EmployeeFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_back;
-    private javax.swing.JButton btn_del;
-    private javax.swing.JButton btn_editname;
     private javax.swing.JButton btn_editpass;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel5;

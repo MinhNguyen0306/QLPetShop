@@ -129,7 +129,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel5.setForeground(new java.awt.Color(0, 204, 102));
         jLabel5.setText("Manage Customers");
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/customer.png"))); // NOI18N
@@ -191,10 +191,11 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("District");
 
-        btn_reset.setForeground(new java.awt.Color(255, 0, 51));
+        btn_reset.setBackground(new java.awt.Color(51, 51, 51));
+        btn_reset.setForeground(new java.awt.Color(255, 255, 255));
         btn_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reset.png"))); // NOI18N
         btn_reset.setText("Reset");
-        btn_reset.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_reset.setBorder(null);
         btn_reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_resetActionPerformed(evt);
@@ -210,40 +211,44 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Village");
 
-        btn_save.setForeground(new java.awt.Color(255, 0, 51));
+        btn_save.setBackground(new java.awt.Color(51, 51, 51));
+        btn_save.setForeground(new java.awt.Color(255, 255, 255));
         btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/save.png"))); // NOI18N
         btn_save.setText("Save");
-        btn_save.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_save.setBorder(null);
         btn_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_saveActionPerformed(evt);
             }
         });
 
-        btn_edit.setForeground(new java.awt.Color(255, 0, 51));
+        btn_edit.setBackground(new java.awt.Color(51, 51, 51));
+        btn_edit.setForeground(new java.awt.Color(255, 255, 255));
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit.png"))); // NOI18N
         btn_edit.setText("Edit");
-        btn_edit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_edit.setBorder(null);
         btn_edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editActionPerformed(evt);
             }
         });
 
-        btn_del.setForeground(new java.awt.Color(255, 0, 51));
+        btn_del.setBackground(new java.awt.Color(51, 51, 51));
+        btn_del.setForeground(new java.awt.Color(255, 255, 255));
         btn_del.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/del.png"))); // NOI18N
         btn_del.setText("Delete");
-        btn_del.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_del.setBorder(null);
         btn_del.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_delActionPerformed(evt);
             }
         });
 
-        btn_home.setForeground(new java.awt.Color(255, 0, 51));
+        btn_home.setBackground(new java.awt.Color(51, 51, 51));
+        btn_home.setForeground(new java.awt.Color(255, 255, 255));
         btn_home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home.png"))); // NOI18N
         btn_home.setText("Home");
-        btn_home.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_home.setBorder(null);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_homeActionPerformed(evt);
@@ -357,7 +362,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                     .addComponent(cbx_xa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txt_code, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
+                .addGap(89, 89, 89)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,7 +371,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
+                .addGap(30, 30, 30))
         );
 
         tbl_customer.setModel(new javax.swing.table.DefaultTableModel(

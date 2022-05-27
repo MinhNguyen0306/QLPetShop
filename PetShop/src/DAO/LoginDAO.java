@@ -11,21 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginDAO {
-    public void signin(EmployeeModel employee){
+    public void signin(String name, String pass){
         Connection con = ConnectSQL.getConnect();
-        String sql = "select * employee where cName = ? and cPass = ?";
+        String sql = "select * from employee where eName = ? and ePass = ?";
         try{
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, employee.geteName());
-            pst.setString(2, employee.getePass());
+            pst.setString(1, name);
+            pst.setString(2, pass);
             ResultSet rs = pst.executeQuery();
             LoginFrame login = new LoginFrame();
             if(rs.next()){
                 JOptionPane.showMessageDialog(login, "Đăng nhập thành công!");
-                HomeFrame home = new HomeFrame();
-                home.setVisible(true);
+                new LoginFrame().dispose();
+                new HomeFrame().setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(login, "Tài khoản hoặc mật khẩu không đúng!");             
+                JOptionPane.showMessageDialog(login, "Tài khoản hoặc mật khẩu không đúng!"); 
             }      
         }catch(Exception e){
             e.printStackTrace();

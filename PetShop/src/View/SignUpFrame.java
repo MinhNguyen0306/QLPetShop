@@ -99,12 +99,22 @@ public class SignUpFrame extends javax.swing.JFrame {
         btn_login.setForeground(new java.awt.Color(255, 255, 255));
         btn_login.setText("Login");
         btn_login.setBorder(null);
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
         btn_submit.setBackground(new java.awt.Color(153, 0, 153));
         btn_submit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_submit.setForeground(new java.awt.Color(255, 255, 255));
         btn_submit.setText("Submit");
         btn_submit.setBorder(null);
+        btn_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_submitActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
@@ -162,6 +172,16 @@ public class SignUpFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
+        
+    }//GEN-LAST:event_btn_submitActionPerformed
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_loginActionPerformed
 
     /**
      * @param args the command line arguments

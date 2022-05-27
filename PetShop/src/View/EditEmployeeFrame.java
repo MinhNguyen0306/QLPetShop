@@ -97,6 +97,11 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
         btn_edit.setText("Exchange");
 
         btn_close.setText("Close");
+        btn_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_closeActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 204, 204));
@@ -211,6 +216,10 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_closeActionPerformed
 
     /**
      * @param args the command line arguments

@@ -14,12 +14,12 @@ public class PetModel {
     public void setpID(int pID) {
         this.pID = pID;
     }
-    
+
     public String getpName() {
         return pName;
     }
 
-    public void setpName(String name) {
+    public void setpName(String pName) {
         this.pName = pName;
     }
 
@@ -27,7 +27,7 @@ public class PetModel {
         return pCategory;
     }
 
-    public void setpCategory(String category) {
+    public void setpCategory(String pCategory) {
         this.pCategory = pCategory;
     }
 
@@ -35,7 +35,7 @@ public class PetModel {
         return pQuantity;
     }
 
-    public void setpQuantity(int quantity) {
+    public void setpQuantity(int pQuantity) {
         this.pQuantity = pQuantity;
     }
 
@@ -43,7 +43,7 @@ public class PetModel {
         return pPrice;
     }
 
-    public void setpPrice(float price) {
+    public void setpPrice(float pPrice) {
         this.pPrice = pPrice;
     }
 }

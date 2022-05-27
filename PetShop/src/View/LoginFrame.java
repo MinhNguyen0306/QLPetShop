@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class LoginFrame extends javax.swing.JFrame {
     LoginDAO loginDAO;
     EmployeeModel employee;
+    static String uname;
     
     public LoginFrame() {
         setTitle("Đăng nhập");
@@ -98,6 +99,11 @@ public class LoginFrame extends javax.swing.JFrame {
         btn_signup.setForeground(new java.awt.Color(255, 255, 255));
         btn_signup.setText("Sign Up");
         btn_signup.setBorder(null);
+        btn_signup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_signupActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
@@ -108,6 +114,11 @@ public class LoginFrame extends javax.swing.JFrame {
         btn_signin.setForeground(new java.awt.Color(255, 255, 255));
         btn_signin.setText("Sign In");
         btn_signin.setBorder(null);
+        btn_signin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_signinActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -115,7 +126,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         lbl_forgot.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_forgot.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_forgot.setText("Forgot password ?");
+        lbl_forgot.setText("Login with admin");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -169,6 +180,24 @@ public class LoginFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_signinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signinActionPerformed
+        if(txt_name.getText().isEmpty() || txt_pass.getPassword().equals("")){
+            JOptionPane.showMessageDialog(this, "Thiếu thông tin");
+        }else{
+            loginDAO = new LoginDAO(); 
+            uname = txt_name.getText();
+            loginDAO.signin(txt_name.getText(), txt_pass.getText());
+            txt_name.setText("");
+            txt_pass.setText(""); 
+        }
+    }//GEN-LAST:event_btn_signinActionPerformed
+
+    private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
+        SignUpFrame su = new SignUpFrame();
+        su.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_signupActionPerformed
 
     /**
      * @param args the command line arguments
