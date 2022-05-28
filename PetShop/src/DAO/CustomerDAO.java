@@ -67,7 +67,6 @@ public class CustomerDAO {
             JOptionPane.showMessageDialog(c, "Update Succecfully!");
             System.out.print(rs);
         }catch(Exception e){
-            e.printStackTrace();
         }
     }
     

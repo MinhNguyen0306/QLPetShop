@@ -52,4 +52,18 @@ public class LoginDAO {
         }      
         return emps;
     }
+    
+    public void editEmployee(String phone, String gender, String pass, int id){
+        Connection con = ConnectSQL.getConnect();
+        String query = "update employee set ePhone=?, eGender=?, ePass=? where eID=?";
+        try {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, phone);
+            pst.setString(2, gender);
+            pst.setString(3, pass);
+            pst.setInt(4, id);
+            int rs = pst.executeUpdate();
+        } catch (Exception e) {
+        } 
+    }
 }

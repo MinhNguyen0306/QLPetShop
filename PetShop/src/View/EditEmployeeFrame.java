@@ -1,23 +1,24 @@
 package View;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import DAO.LoginDAO;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
+
 public class EditEmployeeFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EditEmployeeFrame
-     */
     public EditEmployeeFrame() {
         initComponents();
+        txt_id.setText(EmployeeFrame.eid);
+        txt_curname.setText(EmployeeFrame.ename);
+        setResizable(false);
     }
-
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,21 +32,19 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        txt_curname = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txt_exchangename = new javax.swing.JTextField();
+        txt_curname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cbx_eid = new javax.swing.JComboBox<>();
         btn_edit = new javax.swing.JButton();
         btn_close = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txt_pass = new javax.swing.JTextField();
-        txt_phone = new javax.swing.JTextField();
+        txt_expass = new javax.swing.JTextField();
+        txt_exphone = new javax.swing.JTextField();
         btn_nam = new javax.swing.JRadioButton();
         btn_nu = new javax.swing.JRadioButton();
+        txt_id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Exchange Username");
@@ -61,9 +60,9 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(77, 77, 77)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,30 +72,29 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
-
-        txt_curname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 204, 204));
         jLabel1.setText("Current Username");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 204, 204));
-        jLabel2.setText("Exchange Username");
-
-        txt_exchangename.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
+        txt_curname.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txt_curname.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 204, 204));
         jLabel3.setText("Employee ID");
 
-        cbx_eid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btn_edit.setBackground(new java.awt.Color(204, 204, 204));
+        btn_edit.setBackground(new java.awt.Color(153, 0, 153));
         btn_edit.setText("Exchange");
+        btn_edit.setBorder(null);
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
+        btn_close.setBackground(new java.awt.Color(153, 0, 153));
         btn_close.setText("Close");
+        btn_close.setBorder(null);
         btn_close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_closeActionPerformed(evt);
@@ -104,26 +102,26 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 204, 204));
         jLabel5.setText("Exchange Password");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 204, 204));
         jLabel6.setText("Exchange Phone");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 204, 204));
         jLabel7.setText("Exchange Gender");
 
-        txt_pass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
+        txt_expass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txt_phone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
+        txt_exphone.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         buttonGroup1.add(btn_nam);
         btn_nam.setText("Nam");
 
         buttonGroup1.add(btn_nu);
         btn_nu.setText("Nữ");
+
+        txt_id.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txt_id.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -135,76 +133,68 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_exchangename, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbx_eid, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btn_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(btn_nu, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_curname, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_expass, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_exphone, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_curname, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 32, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_nu, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(btn_edit)
-                .addGap(34, 34, 34)
-                .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cbx_eid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txt_exchangename, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_curname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_curname, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_expass, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txt_exphone, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
                     .addComponent(btn_nam)
+                    .addComponent(jLabel7)
                     .addComponent(btn_nu))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_edit)
-                    .addComponent(btn_close))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +210,18 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
         this.dispose();
     }//GEN-LAST:event_btn_closeActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        String gender = null;
+        if(btn_nam.isSelected())
+            gender += btn_nam.getText();
+        if(btn_nu.isSelected())
+            gender += btn_nu.getText();
+        LoginDAO dao = new LoginDAO();
+        dao.editEmployee(txt_exphone.getText(), gender, txt_expass.getText(), Integer.parseInt(txt_id.getText()));
+        JOptionPane.showMessageDialog(this, "Thay doi thanh cong");
+        this.dispose();
+    }//GEN-LAST:event_btn_editActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,9 +264,7 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton btn_nam;
     private javax.swing.JRadioButton btn_nu;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbx_eid;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -273,8 +273,8 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txt_curname;
-    private javax.swing.JTextField txt_exchangename;
-    private javax.swing.JTextField txt_pass;
-    private javax.swing.JTextField txt_phone;
+    private javax.swing.JTextField txt_expass;
+    private javax.swing.JTextField txt_exphone;
+    private javax.swing.JTextField txt_id;
     // End of variables declaration//GEN-END:variables
 }

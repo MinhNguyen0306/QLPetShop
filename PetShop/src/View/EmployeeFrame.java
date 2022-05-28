@@ -4,18 +4,42 @@
  */
 package View;
 
+import DAO.LoginDAO;
+import Model.EmployeeModel;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
  */
 public class EmployeeFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form EmployeeFrame
-     */
+    static String ename;
+    static String eid;
+    
     public EmployeeFrame() {
         initComponents();
+        display_table();
     }
+    
+    public void display_table(){
+        LoginDAO dao = new LoginDAO();
+        List<EmployeeModel> employees = dao.getEmployee();
+        DefaultTableModel model = new DefaultTableModel();
+        tbl_employee.setModel(model);
+        model.addColumn("id");
+        model.addColumn("Name");
+        model.addColumn("Phone");
+        model.addColumn("Gender");
+        model.addColumn("Pass");
+        
+        for(EmployeeModel e:employees){
+            model.addRow(new Object[]{e.geteID(),e.geteName(),e.getePhone(),e.geteGender(),e.getePass()});
+        }
+    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +98,11 @@ public class EmployeeFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_employee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_employeeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_employee);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
@@ -81,7 +110,7 @@ public class EmployeeFrame extends javax.swing.JFrame {
         btn_editpass.setBackground(new java.awt.Color(51, 51, 51));
         btn_editpass.setForeground(new java.awt.Color(255, 255, 255));
         btn_editpass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit.png"))); // NOI18N
-        btn_editpass.setText("Edit Password");
+        btn_editpass.setText("Edit Info");
         btn_editpass.setBorder(null);
         btn_editpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +179,13 @@ public class EmployeeFrame extends javax.swing.JFrame {
         new LoginFrame().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_backActionPerformed
+
+    private void tbl_employeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_employeeMouseClicked
+        DefaultTableModel model = (DefaultTableModel)tbl_employee.getModel();
+        int index = tbl_employee.getSelectedRow();
+        eid = model.getValueAt(index, 0).toString();
+        ename = model.getValueAt(index, 1).toString();
+    }//GEN-LAST:event_tbl_employeeMouseClicked
 
     /**
      * @param args the command line arguments

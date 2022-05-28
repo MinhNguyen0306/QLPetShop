@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CustomerFrame extends javax.swing.JFrame {
@@ -80,7 +79,6 @@ public class CustomerFrame extends javax.swing.JFrame {
                 cbx_xa.addItem(rs.getString("tenXa"));
             }
         } catch(Exception e){
-            e.printStackTrace();
         } 
     }
     
