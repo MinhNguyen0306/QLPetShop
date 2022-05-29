@@ -7,7 +7,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -132,13 +132,13 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_confirm" min="-2" pref="179" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <Component id="txt_pass" min="-2" pref="179" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="txt_name" min="-2" pref="179" max="-2" attributes="0"/>
                               <Component id="btn_submit" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Component id="txt_confirm" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -262,7 +262,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txt_pass">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_confirm">
+        <Component class="javax.swing.JPasswordField" name="txt_confirm">
         </Component>
       </SubComponents>
     </Container>

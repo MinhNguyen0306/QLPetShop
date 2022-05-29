@@ -3,6 +3,7 @@ package DAO;
 import Model.EmployeeModel;
 import View.HomeFrame;
 import View.LoginFrame;
+import View.StartProcessFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
@@ -11,8 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginDAO {
+    Connection con = null;
+    
     public void signin(String name, String pass){
-        Connection con = ConnectSQL.getConnect();
+        con = ConnectSQL.getConnect();
         String sql = "select * from employee where eName = ? and ePass = ?";
         try{
             PreparedStatement pst = con.prepareStatement(sql);
@@ -22,7 +25,7 @@ public class LoginDAO {
             LoginFrame login = new LoginFrame();
             if(rs.next()){
                 JOptionPane.showMessageDialog(login, "Đăng nhập thành công!");
-                new LoginFrame().dispose();
+                login.dispose();
                 new HomeFrame().setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(login, "Tài khoản hoặc mật khẩu không đúng!"); 
@@ -34,7 +37,7 @@ public class LoginDAO {
     
     public List<EmployeeModel> getEmployee(){
         List<EmployeeModel> emps = new ArrayList<EmployeeModel>();
-        Connection con = ConnectSQL.getConnect();
+        con = ConnectSQL.getConnect();
         String sql = "select * from employee";
         try{
             PreparedStatement pst = con.prepareStatement(sql);
@@ -53,8 +56,20 @@ public class LoginDAO {
         return emps;
     }
     
+    public void addEmployee(String name, String pass){
+        con = ConnectSQL.getConnect();
+        String query = "insert into employee(eName,ePass) values(?,?)";
+        try {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, name);
+            pst.setString(2, pass);
+            int rs = pst.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
     public void editEmployee(String phone, String gender, String pass, int id){
-        Connection con = ConnectSQL.getConnect();
+        con = ConnectSQL.getConnect();
         String query = "update employee set ePhone=?, eGender=?, ePass=? where eID=?";
         try {
             PreparedStatement pst = con.prepareStatement(query);

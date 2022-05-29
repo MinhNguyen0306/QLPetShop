@@ -1,6 +1,8 @@
 package View;
 
+import DAO.LoginDAO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class SignUpFrame extends javax.swing.JFrame {
 
@@ -32,7 +34,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         btn_submit = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txt_pass = new javax.swing.JPasswordField();
-        txt_confirm = new javax.swing.JTextField();
+        txt_confirm = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng ký");
@@ -132,13 +134,13 @@ public class SignUpFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 67, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
                             .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(64, 64, 64))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
@@ -171,10 +173,23 @@ public class SignUpFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 0, 310, 450));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
-        
+        LoginDAO dao = new LoginDAO();
+        if(txt_name.getText().isEmpty() || txt_pass.equals("") || txt_confirm.equals("")){
+            JOptionPane.showMessageDialog(this, "Thieu thong tin!");
+        }else{
+            if(txt_confirm.getPassword() != txt_pass.getPassword()){
+                JOptionPane.showMessageDialog(this, "Mat khau khong khop!!");
+            }else{
+                dao.addEmployee(txt_name.getText(), txt_confirm.getText());
+                JOptionPane.showMessageDialog(this, "Dang ky thanh cong!");
+                new LoginFrame().setVisible(true);
+                this.dispose();
+            }
+        } 
     }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
@@ -230,7 +245,7 @@ public class SignUpFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txt_confirm;
+    private javax.swing.JPasswordField txt_confirm;
     private javax.swing.JTextField txt_name;
     private javax.swing.JPasswordField txt_pass;
     // End of variables declaration//GEN-END:variables
