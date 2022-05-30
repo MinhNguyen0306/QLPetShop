@@ -46,4 +46,10 @@ public class EmployeeModel {
     public void setePass(String ePass) {
         this.ePass = ePass;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeModel{" + "eID=" + eID + ", eName=" + eName + ", ePhone=" + ePhone + ", eGender=" + eGender + ", ePass=" + ePass + '}';
+    }
+    
 }

@@ -4,6 +4,8 @@
  */
 package View;
 
+import java.awt.Color;
+
 public class StartProcessFrame extends javax.swing.JFrame {
 
     public StartProcessFrame() {
@@ -32,11 +34,9 @@ public class StartProcessFrame extends javax.swing.JFrame {
         setUndecorated(true);
 
         kGradientPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        kGradientPanel1.setkEndColor(new java.awt.Color(204, 0, 0));
-        kGradientPanel1.setkStartColor(new java.awt.Color(102, 102, 102));
 
         bar.setBackground(new java.awt.Color(204, 0, 0));
-        bar.setForeground(new java.awt.Color(153, 153, 153));
+        bar.setForeground(new java.awt.Color(153, 153, 0));
         bar.setToolTipText("");
 
         lbl_load.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -142,11 +142,12 @@ public class StartProcessFrame extends javax.swing.JFrame {
         try{
             int i = 0;
             while(i<=100){
-                Thread.sleep(50);
+                Thread.sleep(30);
                 bar.setValue(i);
                 lbl_load.setText("LOADING " + i + "%.......");
                 i++;
             }
+            
             dispose();
             new LoginFrame().setVisible(true);
             
