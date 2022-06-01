@@ -214,15 +214,14 @@ public class EditEmployeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        String gender = null;
+        String gender = "";
         if(btn_nam.isSelected())
             gender += btn_nam.getText();
         if(btn_nu.isSelected())
             gender += btn_nu.getText();
         LoginDAO dao = new LoginDAO();
         dao.editEmployee(txt_exphone.getText(), gender, txt_expass.getText(), Integer.parseInt(txt_id.getText()));
-        JOptionPane.showMessageDialog(this, "Da cap nhat thong tin!");
-        this.dispose();
+        this.dispose(); 
     }//GEN-LAST:event_btn_editActionPerformed
 
     /**

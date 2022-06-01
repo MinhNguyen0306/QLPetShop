@@ -59,6 +59,7 @@ public class EmployeeFrame extends javax.swing.JFrame {
         kGradientPanel1 = new keeptoo.KGradientPanel();
         btn_back = new javax.swing.JButton();
         btn_editpass = new javax.swing.JButton();
+        btn_reset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,16 +129,27 @@ public class EmployeeFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_reset.setBackground(new java.awt.Color(0, 0, 0));
+        btn_reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reset.png"))); // NOI18N
+        btn_reset.setBorder(null);
+        btn_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(228, Short.MAX_VALUE)
                 .addComponent(btn_editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
                 .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(241, 241, 241))
+                .addGap(150, 150, 150)
+                .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +157,8 @@ public class EmployeeFrame extends javax.swing.JFrame {
                 .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -187,6 +200,10 @@ public class EmployeeFrame extends javax.swing.JFrame {
         ename = model.getValueAt(index, 1).toString();
     }//GEN-LAST:event_tbl_employeeMouseClicked
 
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
+        display_table();
+    }//GEN-LAST:event_btn_resetActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -225,6 +242,7 @@ public class EmployeeFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_editpass;
+    private javax.swing.JButton btn_reset;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;

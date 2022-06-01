@@ -1,8 +1,11 @@
 package DAO;
 
 import Model.EmployeeModel;
+import View.EditEmployeeFrame;
 import View.HomeFrame;
 import View.LoginFrame;
+import View.SignUpFrame;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
@@ -13,7 +16,7 @@ import java.util.List;
 public class LoginDAO {
     Connection con = null;
     
-    public void signin(String name, String pass){
+    public void signin(String name, String pass, LoginFrame c){
         con = ConnectSQL.getConnect();
         String sql = "select * from employee where eName = ? and ePass = ?";
         try{
@@ -21,13 +24,13 @@ public class LoginDAO {
             pst.setString(1, name);
             pst.setString(2, pass);
             ResultSet rs = pst.executeQuery();
-            LoginFrame login = new LoginFrame();
+         //   LoginFrame login = new LoginFrame();
             if(rs.next()){
-                JOptionPane.showMessageDialog(login, "Đăng nhập thành công!");
-                login.dispose();
+                JOptionPane.showMessageDialog(c, "Đăng nhập thành công!");
+                c.dispose();
                 new HomeFrame().setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(login, "Tài khoản hoặc mật khẩu không đúng!"); 
+                JOptionPane.showMessageDialog(c, "Tài khoản hoặc mật khẩu không đúng!"); 
             }      
         }catch(Exception e){
             e.printStackTrace();
@@ -63,6 +66,12 @@ public class LoginDAO {
             pst.setString(1, name);
             pst.setString(2, pass);
             int rs = pst.executeUpdate();
+            SignUpFrame s = new SignUpFrame();
+            if(rs == 1){
+                JOptionPane.showMessageDialog(s, "SignUp Succesfully!");
+            }else{
+                JOptionPane.showMessageDialog(s, "SignUp Failled!");
+            }
         } catch (Exception e) {
         }
     }
@@ -77,6 +86,12 @@ public class LoginDAO {
             pst.setString(3, pass);
             pst.setInt(4, id);
             int rs = pst.executeUpdate();
+            EditEmployeeFrame e = new EditEmployeeFrame();
+            if(rs == 1){
+                JOptionPane.showMessageDialog(e, "Exchange Info Succesfully!");
+            }else{
+                JOptionPane.showMessageDialog(e, "Exchange Info Failed!");
+            }
         } catch (Exception e) {
         } 
     }

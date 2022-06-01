@@ -3,6 +3,7 @@ package View;
 import DAO.ConnectSQL;
 import DAO.LoginDAO;
 import Model.EmployeeModel;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class LoginFrame extends javax.swing.JFrame {
         btn_signin = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txt_name = new javax.swing.JTextField();
-        lbl_forgot = new javax.swing.JLabel();
+        lbl_admin = new javax.swing.JLabel();
         txt_pass = new javax.swing.JPasswordField();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -105,7 +106,7 @@ public class LoginFrame extends javax.swing.JFrame {
         btn_signin.setBackground(new java.awt.Color(153, 0, 153));
         btn_signin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_signin.setForeground(new java.awt.Color(255, 255, 255));
-        btn_signin.setText("Sign In");
+        btn_signin.setText("Log In");
         btn_signin.setBorder(null);
         btn_signin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,9 +128,26 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        lbl_forgot.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbl_forgot.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_forgot.setText("Login with admin");
+        lbl_admin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_admin.setForeground(java.awt.Color.blue);
+        lbl_admin.setText("Login with admin");
+        lbl_admin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_adminMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_adminMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_adminMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl_adminMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbl_adminMouseReleased(evt);
+            }
+        });
 
         txt_pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 153, 204)));
 
@@ -156,7 +174,7 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(lbl_forgot)))
+                        .addComponent(lbl_admin)))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -177,7 +195,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(btn_signin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_signup, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(lbl_forgot)
+                .addComponent(lbl_admin)
                 .addGap(27, 27, 27))
         );
 
@@ -230,11 +248,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void btn_signinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signinActionPerformed
         if(txt_name.getText().isEmpty() || txt_pass.getPassword().equals("")){
-            JOptionPane.showMessageDialog(this, "Thiếu thông tin");
+            JOptionPane.showMessageDialog(this, "Missing Infomation!");
         }else{
             loginDAO = new LoginDAO(); 
             uname = txt_name.getText();
-            loginDAO.signin(txt_name.getText(), txt_pass.getText());
+            loginDAO.signin(txt_name.getText(), txt_pass.getText(), this);
             txt_name.setText("");
             txt_pass.setText(""); 
         }
@@ -265,6 +283,27 @@ public class LoginFrame extends javax.swing.JFrame {
         txt_name.setText(list.getSelectedValue());
         menu.setVisible(false);
     }//GEN-LAST:event_listMouseClicked
+
+    private void lbl_adminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_adminMouseClicked
+        new AdminFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbl_adminMouseClicked
+
+    private void lbl_adminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_adminMouseExited
+        lbl_admin.setForeground(Color.BLUE);
+    }//GEN-LAST:event_lbl_adminMouseExited
+
+    private void lbl_adminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_adminMousePressed
+        lbl_admin.setForeground(Color.red);
+    }//GEN-LAST:event_lbl_adminMousePressed
+
+    private void lbl_adminMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_adminMouseReleased
+        lbl_admin.setForeground(Color.red);
+    }//GEN-LAST:event_lbl_adminMouseReleased
+
+    private void lbl_adminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_adminMouseEntered
+        lbl_admin.setForeground(Color.red);
+    }//GEN-LAST:event_lbl_adminMouseEntered
 
     public void display_menu(String name){
         Connection con = ConnectSQL.getConnect();
@@ -333,7 +372,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private keeptoo.KGradientPanel kGradientPanel1;
-    private javax.swing.JLabel lbl_forgot;
+    private javax.swing.JLabel lbl_admin;
     private javax.swing.JList<String> list;
     private javax.swing.JPopupMenu menu;
     private javax.swing.JPanel panel_list;

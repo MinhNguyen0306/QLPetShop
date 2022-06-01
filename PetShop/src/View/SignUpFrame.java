@@ -1,15 +1,16 @@
 package View;
 
 import DAO.LoginDAO;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class SignUpFrame extends javax.swing.JFrame {
 
     public SignUpFrame() {
+        initComponents();
         ImageIcon image = new ImageIcon("src/image/cat.png");
         setIconImage(image.getImage());
-        initComponents();
     }
 
     /**
@@ -183,11 +184,10 @@ public class SignUpFrame extends javax.swing.JFrame {
         if(txt_name.getText().isEmpty() || txt_pass.equals("") || txt_confirm.equals("")){
             JOptionPane.showMessageDialog(this, "Thieu thong tin!");
         }else{
-            if(txt_confirm.getPassword() != txt_pass.getPassword()){
+            if(!(Arrays.equals(txt_pass.getPassword(), txt_confirm.getPassword()))){
                 JOptionPane.showMessageDialog(this, "Mat khau khong khop!!");
             }else{
                 dao.addEmployee(txt_name.getText(), txt_confirm.getText());
-                JOptionPane.showMessageDialog(this, "Dang ky thanh cong!");
                 new LoginFrame().setVisible(true);
                 this.dispose();
             }
